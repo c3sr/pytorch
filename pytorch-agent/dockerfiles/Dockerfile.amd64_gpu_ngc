@@ -51,8 +51,11 @@ RUN dep ensure -v -no-vendor -update \
     github.com/c3sr/go-pytorch \
     github.com/c3sr/dlframework \
     github.com/rai-project/tracer \
-    github.com/rai-project/evaluation && \
+    github.com/c3sr/evaluation && \
     dep ensure -v -vendor-only
+
+# temporary solution, since there are too many repos need to be modified
+RUN grep -rl 'rai-project/dlframework' vendor | xargs sed -i 's=rai-project/dlframework=c3sr/dlframework=g'
 
 RUN ln -s /usr/local/cuda-10.2/targets/x86_64-linux/lib/stubs/libnvidia-ml.so /usr/local/cuda-10.2/targets/x86_64-linux/lib/stubs/libnvidia-ml.so.1
 

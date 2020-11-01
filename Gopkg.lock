@@ -259,7 +259,20 @@
     "steps",
   ]
   pruneopts = "T"
-  revision = "cf61ba27630e2df7278f362906d8b4cf0ce9f32e"
+  revision = "ce9f1e914f304f39f3ca634526f77782b464686b"
+
+[[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/c3sr/evaluation"
+  packages = [
+    ".",
+    "cmd",
+    "eventflow",
+    "writer",
+  ]
+  pruneopts = "T"
+  revision = "dd99a8ac6cbe15d1404671e1d68f8c9cde7d2e38"
 
 [[projects]]
   branch = "master"
@@ -1510,12 +1523,8 @@
   packages = [
     ".",
     "framework",
-    "framework/agent",
     "framework/cmd",
     "framework/feature",
-    "framework/options",
-    "framework/predictor",
-    "steps",
   ]
   pruneopts = "T"
   revision = "4aaa12cfa5874a785cbe70a2bc8a849472c7bc95"
@@ -1551,19 +1560,6 @@
   packages = ["."]
   pruneopts = "T"
   revision = "ba1da121542db77fc12e929de694d3defb5b44f7"
-
-[[projects]]
-  branch = "master"
-  digest = "0:"
-  name = "github.com/rai-project/evaluation"
-  packages = [
-    ".",
-    "cmd",
-    "eventflow",
-    "writer",
-  ]
-  pruneopts = "T"
-  revision = "c120575eed51ba7e0caf8dade4af7682ee0452fb"
 
 [[projects]]
   branch = "master"

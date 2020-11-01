@@ -5,18 +5,18 @@ import (
 	"io"
 	"strings"
 
-	"github.com/k0kubun/pp"
-	opentracing "github.com/opentracing/opentracing-go"
-	olog "github.com/opentracing/opentracing-go/log"
-	"github.com/pkg/errors"
-	"github.com/rai-project/config"
+	//	"github.com/k0kubun/pp"
 	"github.com/c3sr/dlframework"
 	"github.com/c3sr/dlframework/framework/agent"
 	"github.com/c3sr/dlframework/framework/options"
 	common "github.com/c3sr/dlframework/framework/predictor"
-	"github.com/rai-project/downloadmanager"
 	gopytorch "github.com/c3sr/go-pytorch"
 	"github.com/c3sr/pytorch"
+	opentracing "github.com/opentracing/opentracing-go"
+	olog "github.com/opentracing/opentracing-go/log"
+	"github.com/pkg/errors"
+	"github.com/rai-project/config"
+	"github.com/rai-project/downloadmanager"
 	"github.com/rai-project/tracer"
 	gotensor "gorgonia.org/tensor"
 )
@@ -240,7 +240,7 @@ func (p *ImageEnhancementPredictor) Predict(ctx context.Context, data interface{
 	fst := gotensors[0]
 	dims := append([]int{len(gotensors)}, fst.Shape()...)
 	// debug
-	pp.Println(dims)
+	// pp.Println(dims)
 	// TODO: support data types other than float32
 	var input []float32
 	for _, t := range gotensors {

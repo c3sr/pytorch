@@ -7,10 +7,10 @@ import (
 	"testing"
 
 	"github.com/c3sr/dlframework/framework/options"
+	py "github.com/c3sr/pytorch"
 	raiimage "github.com/rai-project/image"
 	"github.com/rai-project/image/types"
 	nvidiasmi "github.com/rai-project/nvidia-smi"
-	py "github.com/c3sr/pytorch"
 	"github.com/stretchr/testify/assert"
 	gotensor "gorgonia.org/tensor"
 )
