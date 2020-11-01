@@ -1,4 +1,5 @@
-FROM carml/go-pytorch:amd64-gpu-latest
+FROM c3sr/go-pytorch:amd64-gpu-latest
+MAINTAINER Yen-Hsiang Chang <yhchang3@illinois.edu>
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -19,14 +20,14 @@ LABEL org.pytorch.agent.build-date=$BUILD_DATE \
 
 
 # Get Go bindings
-ENV PKG github.com/rai-project/pytorch
+ENV PKG github.com/c3sr/pytorch
 WORKDIR $GOPATH/src/$PKG
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
 RUN dep ensure -v -no-vendor -update \
-    github.com/rai-project/go-pytorch \
-    github.com/rai-project/dlframework \
+    github.com/c3sr/go-pytorch \
+    github.com/c3sr/dlframework \
     github.com/rai-project/evaluation \
     github.com/rai-project/tracer && \
     dep ensure -v -vendor-only

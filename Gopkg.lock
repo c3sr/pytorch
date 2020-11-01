@@ -244,6 +244,32 @@
   revision = "0dd3f918b21bec95ace9dc86c7e70266cfc5c702"
 
 [[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/c3sr/dlframework"
+  packages = [
+    ".",
+    "framework",
+    "framework/agent",
+    "framework/cmd",
+    "framework/cmd/server",
+    "framework/feature",
+    "framework/options",
+    "framework/predictor",
+    "steps",
+  ]
+  pruneopts = "T"
+  revision = "cf61ba27630e2df7278f362906d8b4cf0ce9f32e"
+
+[[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/c3sr/go-pytorch"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "1b16e49370b7303697514bd135355be01cfce823"
+
+[[projects]]
   digest = "0:"
   name = "github.com/caio/go-tdigest"
   packages = ["."]
@@ -944,6 +970,14 @@
   version = "v0.8.3"
 
 [[projects]]
+  digest = "0:"
+  name = "github.com/iancoleman/strcase"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "31e1dd6d285ceb0a110aec6898a75dd6934a35ed"
+  version = "v0.1.2"
+
+[[projects]]
   branch = "master"
   digest = "0:"
   name = "github.com/ianlancetaylor/cgosymbolizer"
@@ -1478,7 +1512,6 @@
     "framework",
     "framework/agent",
     "framework/cmd",
-    "framework/cmd/server",
     "framework/feature",
     "framework/options",
     "framework/predictor",
@@ -1535,6 +1568,17 @@
 [[projects]]
   branch = "master"
   digest = "0:"
+  name = "github.com/rai-project/go-cupti"
+  packages = [
+    ".",
+    "types",
+  ]
+  pruneopts = "T"
+  revision = "042c8db6b58eea64b98a52e9dc4cc069196abc84"
+
+[[projects]]
+  branch = "master"
+  digest = "0:"
   name = "github.com/rai-project/go-echarts"
   packages = ["charts"]
   pruneopts = "T"
@@ -1547,14 +1591,6 @@
   packages = ["."]
   pruneopts = "T"
   revision = "c0c10a7e8235277a0a8c62c91bc70688deac5e5a"
-
-[[projects]]
-  branch = "master"
-  digest = "0:"
-  name = "github.com/rai-project/go-pytorch"
-  packages = ["."]
-  pruneopts = "T"
-  revision = "f2a7fd55aa51f802545b4be3b1b35eec8f56af1b"
 
 [[projects]]
   branch = "master"
@@ -1755,7 +1791,6 @@
     "convert",
     "convert/chrome",
     "convert/flame",
-    "ctimer",
     "defaults",
     "jaeger",
     "middleware/grpc",
@@ -1802,6 +1837,14 @@
   packages = ["logger"]
   pruneopts = "T"
   revision = "97ba6d7fd665f3b5e44934897e444a1b3c0150a4"
+
+[[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/rainycape/dl"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "1b01514224a1a60a6bcbb0b6b9d3a00ec14ae17f"
 
 [[projects]]
   branch = "master"
@@ -2689,26 +2732,25 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/c3sr/dlframework",
+    "github.com/c3sr/dlframework/framework",
+    "github.com/c3sr/dlframework/framework/agent",
+    "github.com/c3sr/dlframework/framework/cmd/server",
+    "github.com/c3sr/dlframework/framework/options",
+    "github.com/c3sr/dlframework/framework/predictor",
+    "github.com/c3sr/go-pytorch",
     "github.com/elazarl/go-bindata-assetfs",
     "github.com/k0kubun/pp",
     "github.com/opentracing/opentracing-go",
     "github.com/opentracing/opentracing-go/log",
     "github.com/pkg/errors",
     "github.com/rai-project/config",
-    "github.com/rai-project/dlframework",
-    "github.com/rai-project/dlframework/framework",
-    "github.com/rai-project/dlframework/framework/agent",
-    "github.com/rai-project/dlframework/framework/cmd/server",
-    "github.com/rai-project/dlframework/framework/options",
-    "github.com/rai-project/dlframework/framework/predictor",
     "github.com/rai-project/downloadmanager",
-    "github.com/rai-project/go-pytorch",
     "github.com/rai-project/image",
     "github.com/rai-project/image/types",
     "github.com/rai-project/logger",
     "github.com/rai-project/nvidia-smi",
     "github.com/rai-project/tracer",
-    "github.com/rai-project/tracer/ctimer",
     "github.com/rai-project/tracer/jaeger",
     "github.com/sirupsen/logrus",
     "github.com/stretchr/testify/assert",

@@ -1,5 +1,6 @@
 jobs:
   - job: CPU
+    timeoutInMinutes: 0
     pool:
       vmImage: 'Ubuntu 16.04'
     steps:
@@ -10,7 +11,8 @@ jobs:
           ./push.sh docker_push_cpu
   - job: GPU
     timeoutInMinutes: 0
-    pool: 'Impact2'
+    pool:
+      vmImage: 'Ubuntu 16.04'
     steps:
       - bash: |
           docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
@@ -19,12 +21,12 @@ jobs:
           ./push.sh docker_push_gpu
   - job: GPU_NGC
     timeoutInMinutes: 0
-    pool: 'Impact2'
+    pool:
+      vmImage: 'Ubuntu 16.04'
     steps:
       - bash: |
           docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
           cd pytorch-agent/dockerfiles
           make docker_build_gpu_ngc
           ./push.sh docker_push_gpu_ngc
-variables:
-- group: Docker Auth
+

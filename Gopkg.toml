@@ -42,7 +42,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/dlframework"
+  name = "github.com/c3sr/dlframework"
 
 [[constraint]]
   branch = "master"
@@ -66,7 +66,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/go-pytorch"
+  name = "github.com/c3sr/go-pytorch"
 
 [[override]]
   name = "github.com/k0kubun/pp"

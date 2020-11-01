@@ -5,10 +5,10 @@ import (
 	"os"
 	
 	"github.com/rai-project/config"
-	cmd "github.com/rai-project/dlframework/framework/cmd/server"
+	cmd "github.com/c3sr/dlframework/framework/cmd/server"
 	"github.com/rai-project/logger"
-	"github.com/rai-project/pytorch"
-	_ "github.com/rai-project/pytorch/predictor"
+	"github.com/c3sr/pytorch"
+	_ "github.com/c3sr/pytorch/predictor"
 	"github.com/rai-project/tracer"
 	"github.com/sirupsen/logrus"
 )

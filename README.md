@@ -1,11 +1,7 @@
 # MLModelScope PyTorch Agent
 
-[![Build Status](https://travis-ci.org/rai-project/pytorch.svg?branch=master)](https://travis-ci.org/rai-project/pytorch)
-[![Build Status](https://dev.azure.com/dakkak/rai/_apis/build/status/pytorch)](https://dev.azure.com/dakkak/rai/_build/latest?definitionId=14)
-[![Go Report Card](https://goreportcard.com/badge/github.com/rai-project/pytorch)](https://goreportcard.com/report/github.com/rai-project/pytorch)
+[![Go Report Card](https://goreportcard.com/badge/github.com/c3sr/pytorch)](https://goreportcard.com/report/github.com/c3sr/pytorch)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
-[![](https://images.microbadger.com/badges/version/carml/pytorch-agent:ppc64le-gpu-latest.svg)](https://microbadger.com/images/carml/pytorch-agent:ppc64le-gpu-latest> 'Get your own version badge on microbadger.com') [![](https://images.microbadger.com/badges/version/carml/pytorch-agent:ppc64le-cpu-latest.svg)](https://microbadger.com/images/carml/pytorch-agent:ppc64le-cpu-latest 'Get your own version badge on microbadger.com') [![](https://images.microbadger.com/badges/version/carml/pytorch-agent:amd64-cpu-latest.svg)](https://microbadger.com/images/carml/pytorch-agent:amd64-cpu-latest "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/version/carml/pytorch-agent:amd64-gpu-latest.svg)](https://microbadger.com/images/carml/pytorch-agent:amd64-gpu-latest "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/version/carml/pytorch-agent:amd64-gpu-ngc-latest.svg)](https://microbadger.com/images/carml/pytorch-agent:amd64-gpu-ngc-latest "Get your own version badge on microbadger.com")
 
 This is the Pytorch agent for [MLModelScope](mlmodelscope.org), an open-source framework and hardware agnostic, extensible and customizable platform for evaluating and profiling ML models across datasets / frameworks / systems, and within AI application pipelines.
 
@@ -71,9 +67,9 @@ export LIBRARY_PATH=$LIBRARY_PATH:/opt/libtorch/lib
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/libtorch/lib
 ```
 
-You can test the installed Pytorch C++ library using an [example C++ program](https://pytorch.org/tutorials/advanced/cpp_frontend.html), although we suggest running an example in `github.com/rai-project/go-pytorch` as per its documentation to confirm library installation.
+You can test the installed Pytorch C++ library using an [example C++ program](https://pytorch.org/tutorials/advanced/cpp_frontend.html), although we suggest running an example in `github.com/c3sr/go-pytorch` as per its documentation to confirm library installation.
 
-To build the Pytorch C++ library from source, refer to [https://github.com/pytorch/pytorch#installation](https://github.com/pytorch/pytorch#installation) and the code for [building go-pytorch dockerfiles](https://github.com/rai-project/go-pytorch/blob/master/dockerfiles/Dockerfile.amd64_gpu).
+To build the Pytorch C++ library from source, refer to [https://github.com/pytorch/pytorch#installation](https://github.com/pytorch/pytorch#installation) and the code for [building go-pytorch dockerfiles](https://github.com/c3sr/go-pytorch/blob/master/dockerfiles/Dockerfile.amd64_gpu).
 
 ### Use libjpeg-turbo for Image Preprocessing
 
@@ -115,13 +111,13 @@ Please follow [Installing Go Compiler](https://github.com/rai-project/rai/blob/m
 Download and install the MLModelScope Pytorch Agent by running the following command in any location, assuming you have installed `go` following the above instruction.
 
 ```
-go get -v github.com/rai-project/pytorch
+go get -v github.com/c3sr/pytorch
 ```
 
 You can then install the dependency packages through `go get`.
 
 ```
-cd $GOPATH/src/github.com/rai-project/pytorch
+cd $GOPATH/src/github.com/c3sr/pytorch
 go get -u -v ./...
 ```
 
@@ -144,13 +140,13 @@ in your `~/.bashrc` or `~/.zshrc` file and then run either `source ~/.bashrc` or
 
 Build the Pytorch agent with GPU enabled
 ```
-cd $GOPATH/src/github.com/rai-project/pytorch/pytorch-agent
+cd $GOPATH/src/github.com/c3sr/pytorch/pytorch-agent
 go build
 ```
 
 Build the Pytorch agent without GPU or libjpeg-turbo
 ```
-cd $GOPATH/src/github.com/rai-project/pytorch/pytorch-agent
+cd $GOPATH/src/github.com/c3sr/pytorch/pytorch-agent
 go build -tags="nogpu nolibjpeg"
 ```
 
@@ -200,7 +196,7 @@ With the configuration and the above bare minimumn installation, you should be r
 
 Here are a few examples. First, make sure we are in the right location
 ```
-cd $GOPATH/src/github.com/rai-project/pytorch/pytorch-agent
+cd $GOPATH/src/github.com/c3sr/pytorch/pytorch-agent
 ```
 
 To see a list of help
@@ -317,12 +313,12 @@ Instead of using a local Pytorch library to install the MLModelScope `pytorch-ag
 You need to follow the above similar procedures to setup `go` and get all the related `rai-project` projects in your local go development environment.
 
 ```
-go get -v github.com/rai-project/pytorch
-cd $GOPATH/src/github.com/rai-project/pytorch
+go get -v github.com/c3sr/pytorch
+cd $GOPATH/src/github.com/c3sr/pytorch
 go get -u -v ./...
 ```
 
-You also need to have the `.carml_config.yml` configuraiton file as discussed above to be placed under $HOME as `.carml_config.yml`
+You also need to have the `.carml_config.yml` configuration file as discussed above to be placed under $HOME as `.carml_config.yml`
 
 You can also setup all the external services as discussed above in your local host machine where you plan to use the Pytorch Docker container.
 
@@ -370,13 +366,13 @@ export GODEBUG=cgocheck=0
 
 Build the Pytorch agent with GPU enabled
 ```
-cd $GOPATH/src/github.com/rai-project/pytorch/pytorch-agent
+cd $GOPATH/src/github.com/c3sr/pytorch/pytorch-agent
 go build
 ```
 
 Build the Pytorch agent without GPU or libjpeg-turbo
 ```
-cd $GOPATH/src/github.com/rai-project/pytorch/pytorch-agent
+cd $GOPATH/src/github.com/c3sr/pytorch/pytorch-agent
 go build -tags="nogpu nolibjpeg"
 ```
 
@@ -408,7 +404,7 @@ Refer to [TODO] to run the web UI to interact with the agent.
 
 # Use the Agent through Pre-built Docker Images
 
-We have [pre-built docker images](https://hub.docker.com/r/carml/pytorch-agent/tags) on Dockerhub. The images are `carml/pytorch-agent:amd64-cpu-latest`, `carml/pytorch-agent:amd64-gpu-latest` and `carml/pytorch-agent:amd64-gpu-ngc-latest`. The entrypoint is set as `pytorch-agent` thus these images act similar as the command line above.
+We have [pre-built docker images](https://hub.docker.com/r/c3sr/pytorch-agent/tags) on Dockerhub. The images are `c3sr/pytorch-agent:amd64-cpu-latest`, `c3sr/pytorch-agent:amd64-gpu-latest` and `c3sr/pytorch-agent:amd64-gpu-ngc-latest`. The entrypoint is set as `pytorch-agent` thus these images act similar as the command line above.
 
 An example run is
 
@@ -416,7 +412,7 @@ An example run is
 docker run --gpus=all --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 --privileged=true \
     --network host \
     -v ~/.carml_config.yml:/root/.carml_config.yml \
-    -v ~/results:/go/src/github.com/rai-project/pytorch/results \
+    -v ~/results:/go/src/github.com/c3sr/pytorch/results \
     carml/pytorch-agent:amd64-gpu-latest predict urls --model_name TorchVision_Alexnet --profile=false --publish=false
 ```
 NOTE: The SHMEM allocation limit is set to the default of 64MB.  This may be insufficient for PyTorch.  NVIDIA recommends the use of the following flags:
@@ -430,4 +426,4 @@ NOTE: To run with GPU, you need to meet following requirements:
 
 # Notes on installing Pytorch C++ from source
 
-To build the Pytorch C++ library from source, refer to [https://github.com/pytorch/pytorch#installation](https://github.com/pytorch/pytorch#installation) and the code for [building go-pytorch dockerfiles](https://github.com/rai-project/go-pytorch/blob/master/dockerfiles/Dockerfile.amd64_gpu).
+To build the Pytorch C++ library from source, refer to [https://github.com/pytorch/pytorch#installation](https://github.com/pytorch/pytorch#installation) and the code for [building go-pytorch dockerfiles](https://github.com/c3sr/go-pytorch/blob/master/dockerfiles/Dockerfile.amd64_gpu).

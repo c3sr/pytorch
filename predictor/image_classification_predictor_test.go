@@ -8,11 +8,11 @@ import (
 	"testing"
 
 	"github.com/k0kubun/pp"
-	"github.com/rai-project/dlframework/framework/options"
+	"github.com/c3sr/dlframework/framework/options"
 	raiimage "github.com/rai-project/image"
 	"github.com/rai-project/image/types"
 	nvidiasmi "github.com/rai-project/nvidia-smi"
-	py "github.com/rai-project/pytorch"
+	py "github.com/c3sr/pytorch"
 	"github.com/stretchr/testify/assert"
 	gotensor "gorgonia.org/tensor"
 )
