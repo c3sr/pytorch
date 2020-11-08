@@ -8,6 +8,7 @@ import (
 	assetfs "github.com/elazarl/go-bindata-assetfs"
 )
 
+// FrameworkManifest ...
 var FrameworkManifest = dlframework.FrameworkManifest{
 	Name:    "PyTorch",
 	Version: "1.3.0",
@@ -33,6 +34,7 @@ func assetFS() *assetfs.AssetFS {
 	panic("unreachable")
 }
 
+// Register ...
 func Register() {
 	err := framework.Register(FrameworkManifest, assetFS())
 	if err != nil {

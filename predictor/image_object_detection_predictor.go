@@ -36,7 +36,7 @@ type ObjectDetectionPredictor struct {
 	classes            interface{}
 }
 
-// New ...
+// NewObjectDetectionPredictor ...
 func NewObjectDetectionPredictor(model dlframework.ModelManifest, os ...options.Option) (common.Predictor, error) {
 	opts := options.New(os...)
 	ctx := opts.Context()
@@ -223,6 +223,7 @@ func (p *ObjectDetectionPredictor) loadPredictor(ctx context.Context) error {
 	return nil
 }
 
+// GetInputLayerName ...
 func (p *ObjectDetectionPredictor) GetInputLayerName(reader io.Reader, layer string) (string, error) {
 	model := p.Model
 	modelInputs := model.GetInputs()
@@ -235,6 +236,7 @@ func (p *ObjectDetectionPredictor) GetInputLayerName(reader io.Reader, layer str
 	return name, nil
 }
 
+// GetOutputLayerName ...
 func (p *ObjectDetectionPredictor) GetOutputLayerName(reader io.Reader, layer string) (string, error) {
 	model := p.Model
 	modelOutput := model.GetOutput()
@@ -293,35 +295,35 @@ func (p *ObjectDetectionPredictor) ReadPredictedFeatures(ctx context.Context) ([
 
 	scores := outputs[0].Data().([]float32)
 	boxes := outputs[1].Data().([]float32)
-	var input_classes []float32
-	var input_scores []float32
+	var inputclasses []float32
+	var inputscores []float32
 	for curObj := 0; curObj < len(boxes)/4; curObj++ {
-		max_score := scores[curObj*len(p.labels)]
-		var max_index int
-		max_index = 0
+		maxscore := scores[curObj*len(p.labels)]
+		var maxindex int
+		maxindex = 0
 		for i := 1; i < len(p.labels); i++ {
 			sc := scores[curObj*len(p.labels)+i]
-			if sc > max_score {
-				max_score = sc
-				max_index = i
+			if sc > maxscore {
+				maxscore = sc
+				maxindex = i
 			}
 		}
-		input_scores = append(input_scores, float32(max_score))
-		input_classes = append(input_classes, float32(max_index))
+		inputscores = append(inputscores, float32(maxscore))
+		inputclasses = append(inputclasses, float32(maxindex))
 	}
 	dims := []int{1, len(boxes) / 4}
-	tensor_classes := gotensor.New(
+	tensorclasses := gotensor.New(
 		gotensor.Of(gotensor.Float32),
-		gotensor.WithBacking(input_classes),
+		gotensor.WithBacking(inputclasses),
 		gotensor.WithShape(dims...),
 	)
-	tensor_scores := gotensor.New(
+	tensorscores := gotensor.New(
 		gotensor.Of(gotensor.Float32),
-		gotensor.WithBacking(input_scores),
+		gotensor.WithBacking(inputscores),
 		gotensor.WithShape(dims...),
 	)
 
-	return p.CreateBoundingBoxFeatures(ctx, tensor_scores, tensor_classes, outputs[1], p.labels)
+	return p.CreateBoundingBoxFeatures(ctx, tensorscores, tensorclasses, outputs[1], p.labels)
 }
 
 // Reset ...
@@ -337,6 +339,7 @@ func (p *ObjectDetectionPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p *ObjectDetectionPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageObjectDetectionModality, nil
 }

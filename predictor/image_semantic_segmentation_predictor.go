@@ -23,12 +23,14 @@ import (
 	gotensor "gorgonia.org/tensor"
 )
 
+// SemanticSegmentationPredictor ...
 type SemanticSegmentationPredictor struct {
 	common.ImagePredictor
 	predictor *gopytorch.Predictor
 	labels    []string
 }
 
+// NewSemanticSegmentationPredictor ...
 func NewSemanticSegmentationPredictor(model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
 	ctx := context.Background()
 	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "new_predictor")
@@ -78,6 +80,7 @@ func (p *SemanticSegmentationPredictor) Download(ctx context.Context, model dlfr
 	return nil
 }
 
+// Load ...
 func (p *SemanticSegmentationPredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
 	framework, err := model.ResolveFramework()
 	if err != nil {
@@ -212,6 +215,7 @@ func (p *SemanticSegmentationPredictor) loadPredictor(ctx context.Context) error
 	return nil
 }
 
+// GetInputLayerName ...
 func (p *SemanticSegmentationPredictor) GetInputLayerName(reader io.Reader, layer string) (string, error) {
 	model := p.Model
 	modelInputs := model.GetInputs()
@@ -224,6 +228,7 @@ func (p *SemanticSegmentationPredictor) GetInputLayerName(reader io.Reader, laye
 	return name, nil
 }
 
+// GetOutputLayerName ...
 func (p *SemanticSegmentationPredictor) GetOutputLayerName(reader io.Reader, layer string) (string, error) {
 	model := p.Model
 	modelOutput := model.GetOutput()
@@ -278,31 +283,34 @@ func (p *SemanticSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 	defer span.Finish()
 
 	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, errors.New("cannot get prediction output")
+	}
 
 	labels, err := p.GetLabels()
 	if err != nil {
 		return nil, errors.New("cannot get the labels")
 	}
 
-	output_array := outputs[0].Data().([]float32)
-	output_batch := outputs[0].Shape()[0]
-	output_feature := outputs[0].Shape()[1]
-	output_height := outputs[0].Shape()[2]
-	output_width := outputs[0].Shape()[3]
+	outputarray := outputs[0].Data().([]float32)
+	outputbatch := outputs[0].Shape()[0]
+	outputfeature := outputs[0].Shape()[1]
+	outputheight := outputs[0].Shape()[2]
+	outputwidth := outputs[0].Shape()[3]
 
 	// convert the output in order to make it compatible with CreateSemanticSegmentFeatures function call
-	masks := make([][][]int64, output_batch)
-	for b := 0; b < output_batch; b++ {
-		masks[b] = make([][]int64, output_height)
-		for h := 0; h < output_height; h++ {
-			masks[b][h] = make([]int64, output_width)
-			for w := 0; w < output_width; w++ {
+	masks := make([][][]int64, outputbatch)
+	for b := 0; b < outputbatch; b++ {
+		masks[b] = make([][]int64, outputheight)
+		for h := 0; h < outputheight; h++ {
+			masks[b][h] = make([]int64, outputwidth)
+			for w := 0; w < outputwidth; w++ {
 				idx := 0
-				cur := output_array[b*output_feature*output_height*output_width+idx*output_height*output_width+h*output_width+w]
-				for f := 1; f < output_feature; f++ {
-					if output_array[b*output_feature*output_height*output_width+f*output_height*output_width+h*output_width+w] > cur {
+				cur := outputarray[b*outputfeature*outputheight*outputwidth+idx*outputheight*outputwidth+h*outputwidth+w]
+				for f := 1; f < outputfeature; f++ {
+					if outputarray[b*outputfeature*outputheight*outputwidth+f*outputheight*outputwidth+h*outputwidth+w] > cur {
 						idx = f
-						cur = output_array[b*output_feature*output_height*output_width+idx*output_height*output_width+h*output_width+w]
+						cur = outputarray[b*outputfeature*outputheight*outputwidth+idx*outputheight*outputwidth+h*outputwidth+w]
 					}
 				}
 				masks[b][h][w] = int64(idx)
@@ -313,10 +321,12 @@ func (p *SemanticSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 	return p.CreateSemanticSegmentFeatures(ctx, masks, labels)
 }
 
+// Reset ...
 func (p *SemanticSegmentationPredictor) Reset(ctx context.Context) error {
 	return nil
 }
 
+// Close ...
 func (p *SemanticSegmentationPredictor) Close() error {
 	if p.predictor != nil {
 		p.predictor.Close()
@@ -324,6 +334,7 @@ func (p *SemanticSegmentationPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p SemanticSegmentationPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageSemanticSegmentationModality, nil
 }

@@ -28,7 +28,7 @@ type ImageEnhancementPredictor struct {
 	images    interface{}
 }
 
-// New ...
+// NewImageEnhancementPredictor ...
 func NewImageEnhancementPredictor(model dlframework.ModelManifest, os ...options.Option) (common.Predictor, error) {
 	opts := options.New(os...)
 	ctx := opts.Context()
@@ -184,6 +184,7 @@ func (p *ImageEnhancementPredictor) loadPredictor(ctx context.Context) error {
 	return nil
 }
 
+// GetInputLayerName ...
 func (p ImageEnhancementPredictor) GetInputLayerName(reader io.Reader, layer string) (string, error) {
 	model := p.Model
 	modelInputs := model.GetInputs()
@@ -196,6 +197,7 @@ func (p ImageEnhancementPredictor) GetInputLayerName(reader io.Reader, layer str
 	return name, nil
 }
 
+// GetOutputLayerName ...
 func (p ImageEnhancementPredictor) GetOutputLayerName(reader io.Reader, layer string) (string, error) {
 	model := p.Model
 	modelOutput := model.GetOutput()
@@ -272,29 +274,29 @@ func (p *ImageEnhancementPredictor) ReadPredictedFeatures(ctx context.Context) (
 		return nil, err
 	}
 
-	output_array := outputs[0].Data().([]float32)
-	output_batch := outputs[0].Shape()[0]
-	output_channels := outputs[0].Shape()[1]
-	output_height := outputs[0].Shape()[2]
-	output_width := outputs[0].Shape()[3]
+	outputarray := outputs[0].Data().([]float32)
+	outputbatch := outputs[0].Shape()[0]
+	outputchannels := outputs[0].Shape()[1]
+	outputheight := outputs[0].Shape()[2]
+	outputwidth := outputs[0].Shape()[3]
 
 	// convert 1D array to a 4D array in order to make it compatible with CreateRawImageFeatures function call
-	e := make([][][][]float32, output_batch)
-	for b := 0; b < output_batch; b++ {
-		e[b] = make([][][]float32, output_height)
-		for h := 0; h < output_height; h++ {
-			e[b][h] = make([][]float32, output_width)
-			for w := 0; w < output_width; w++ {
+	e := make([][][][]float32, outputbatch)
+	for b := 0; b < outputbatch; b++ {
+		e[b] = make([][][]float32, outputheight)
+		for h := 0; h < outputheight; h++ {
+			e[b][h] = make([][]float32, outputwidth)
+			for w := 0; w < outputwidth; w++ {
 				e[b][h][w] = make([]float32, 3)
 			}
 		}
 	}
-	for b := 0; b < output_batch; b++ {
-		for h := 0; h < output_height; h++ {
-			for w := 0; w < output_width; w++ {
-				e[b][h][w][0] = output_array[b*output_height*output_width*output_channels+0*output_height*output_width+h*output_width+w]
-				e[b][h][w][1] = output_array[b*output_height*output_width*output_channels+1*output_height*output_width+h*output_width+w]
-				e[b][h][w][2] = output_array[b*output_height*output_width*output_channels+2*output_height*output_width+h*output_width+w]
+	for b := 0; b < outputbatch; b++ {
+		for h := 0; h < outputheight; h++ {
+			for w := 0; w < outputwidth; w++ {
+				e[b][h][w][0] = outputarray[b*outputheight*outputwidth*outputchannels+0*outputheight*outputwidth+h*outputwidth+w]
+				e[b][h][w][1] = outputarray[b*outputheight*outputwidth*outputchannels+1*outputheight*outputwidth+h*outputwidth+w]
+				e[b][h][w][2] = outputarray[b*outputheight*outputwidth*outputchannels+2*outputheight*outputwidth+h*outputwidth+w]
 			}
 		}
 	}
@@ -302,15 +304,17 @@ func (p *ImageEnhancementPredictor) ReadPredictedFeatures(ctx context.Context) (
 	return p.CreateRawImageFeatures(ctx, e)
 }
 
+// Reset ...
 func (p *ImageEnhancementPredictor) Reset(ctx context.Context) error {
-
 	return nil
 }
 
+// Close ...
 func (p *ImageEnhancementPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p ImageEnhancementPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageEnhancementModality, nil
 }

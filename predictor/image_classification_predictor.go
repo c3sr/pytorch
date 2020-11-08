@@ -29,7 +29,7 @@ type ImageClassificationPredictor struct {
 	labels    []string
 }
 
-// New ...
+// NewImageClassificationPredictor ...
 func NewImageClassificationPredictor(model dlframework.ModelManifest, os ...options.Option) (common.Predictor, error) {
 	opts := options.New(os...)
 	ctx := opts.Context()
@@ -279,6 +279,7 @@ func (p *ImageClassificationPredictor) Close() error {
 	return nil
 }
 
+// Modality ...
 func (p *ImageClassificationPredictor) Modality() (dlframework.Modality, error) {
 	return dlframework.ImageClassificationModality, nil
 }
