@@ -280,7 +280,7 @@
   name = "github.com/c3sr/go-pytorch"
   packages = ["."]
   pruneopts = "T"
-  revision = "1b16e49370b7303697514bd135355be01cfce823"
+  revision = "9652f936b13496e966fa65df9a247d26a104fdbe"
 
 [[projects]]
   digest = "0:"

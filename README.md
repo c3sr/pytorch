@@ -69,7 +69,7 @@ export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/opt/libtorch/lib
 
 You can test the installed Pytorch C++ library using an [example C++ program](https://pytorch.org/tutorials/advanced/cpp_frontend.html), although we suggest running an example in `github.com/c3sr/go-pytorch` as per its documentation to confirm library installation.
 
-To build the Pytorch C++ library from source, refer to [https://github.com/pytorch/pytorch#installation](https://github.com/pytorch/pytorch#installation) and the code for [building go-pytorch dockerfiles](https://github.com/c3sr/go-pytorch/blob/master/dockerfiles/Dockerfile.amd64_gpu).
+There is [an issue](https://github.com/pytorch/pytorch/issues/27971) when using libtorch with version < 1.6.0, the work around here is to set `LRU_CACHE_CAPACITY=1` in the environmental variable. This is already done in the docker images we are using, but needs to be done if building the agent locally.
 
 ### Use libjpeg-turbo for Image Preprocessing
 
@@ -304,7 +304,7 @@ You must have a `carml` config file called `.carml_config.yml` under your home d
 
 The testing steps are very similar to those testing we discussed above, except that you can now safely use both the profiling and publishing services.
 
-# Alternative ways to Install Pytorch-agent using a Pytorch Docker Image
+<!-- # Alternative ways to Install Pytorch-agent using a Pytorch Docker Image
 
 Instead of using a local Pytorch library to install the MLModelScope `pytorch-agent`, we can also use a pytorch docker image to start this process.
 
@@ -374,7 +374,7 @@ Build the Pytorch agent without GPU or libjpeg-turbo
 ```
 cd $GOPATH/src/github.com/c3sr/pytorch/pytorch-agent
 go build -tags="nogpu nolibjpeg"
-```
+``` -->
 
 
 # Use the Agent with the [MLModelScope Web UI](https://github.com/rai-project/mlmodelscope)
@@ -404,7 +404,7 @@ Refer to [TODO] to run the web UI to interact with the agent.
 
 # Use the Agent through Pre-built Docker Images
 
-We have [pre-built docker images](https://hub.docker.com/r/c3sr/pytorch-agent/tags) on Dockerhub. The images are `c3sr/pytorch-agent:amd64-cpu-latest`, `c3sr/pytorch-agent:amd64-gpu-latest` and `c3sr/pytorch-agent:amd64-gpu-ngc-latest`. The entrypoint is set as `pytorch-agent` thus these images act similar as the command line above.
+We have [pre-built docker images](https://hub.docker.com/r/c3sr/pytorch-agent/tags) on Dockerhub. The images are `c3sr/pytorch-agent:amd64-cpu-latest` and `c3sr/pytorch-agent:amd64-gpu-latest`. The entrypoint is set as `pytorch-agent` thus these images act similar as the command line above.
 
 An example run is
 
@@ -421,8 +421,8 @@ NOTE: The SHMEM allocation limit is set to the default of 64MB.  This may be ins
 NOTE: To run with GPU, you need to meet following requirements:
 
 - Docker >= 19.03 with nvidia-container-toolkit (otherwise need to use nvidia-docker)
-- CUDA >= 10.1 (10.2 for NGC)
-- NVIDIA Driver >= 418.39 (440.33 for NGC)
+- CUDA >= 10.1
+- NVIDIA Driver >= 418.39
 
 # Notes on installing Pytorch C++ from source
 

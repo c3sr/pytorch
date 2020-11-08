@@ -3,22 +3,22 @@ package main
 import (
 	"fmt"
 	"os"
-	
-	"github.com/rai-project/config"
+
 	cmd "github.com/c3sr/dlframework/framework/cmd/server"
-	"github.com/rai-project/logger"
 	"github.com/c3sr/pytorch"
 	_ "github.com/c3sr/pytorch/predictor"
+	"github.com/rai-project/config"
+	"github.com/rai-project/logger"
 	"github.com/rai-project/tracer"
 	"github.com/sirupsen/logrus"
 )
 
 var (
-	modelName string
+	modelName    string
 	modelVersion string
-	hostName, _ = os.Hostname()
-	framework = pytorch.FrameworkManifest
-	log *logrus.Entry
+	hostName, _  = os.Hostname()
+	framework    = pytorch.FrameworkManifest
+	log          *logrus.Entry
 )
 
 func main() {

@@ -19,14 +19,14 @@ jobs:
           cd pytorch-agent/dockerfiles
           make docker_build_gpu
           ./push.sh docker_push_gpu
-  - job: GPU_NGC
-    timeoutInMinutes: 0
-    pool:
-      vmImage: 'Ubuntu 16.04'
-    steps:
-      - bash: |
-          docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
-          cd pytorch-agent/dockerfiles
-          make docker_build_gpu_ngc
-          ./push.sh docker_push_gpu_ngc
+  # - job: GPU_NGC
+  #   timeoutInMinutes: 0
+  #   pool:
+  #     vmImage: 'Ubuntu 16.04'
+  #   steps:
+  #     - bash: |
+  #         docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
+  #         cd pytorch-agent/dockerfiles
+  #         make docker_build_gpu_ngc
+  #         ./push.sh docker_push_gpu_ngc
 
