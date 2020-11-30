@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"runtime/debug"
 
-	imagetypes "github.com/rai-project/image/types"
+	imagetypes "github.com/c3sr/image/types"
 	gotensor "gorgonia.org/tensor"
 )
 

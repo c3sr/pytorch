@@ -10,9 +10,9 @@ import (
 	"github.com/c3sr/dlframework/framework/options"
 	py "github.com/c3sr/pytorch"
 	"github.com/k0kubun/pp"
-	raiimage "github.com/rai-project/image"
-	"github.com/rai-project/image/types"
-	nvidiasmi "github.com/rai-project/nvidia-smi"
+	raiimage "github.com/c3sr/image"
+	"github.com/c3sr/image/types"
+	nvidiasmi "github.com/c3sr/nvidia-smi"
 	"github.com/stretchr/testify/assert"
 	gotensor "gorgonia.org/tensor"
 )

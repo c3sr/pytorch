@@ -15,9 +15,9 @@ import (
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
-	"github.com/rai-project/config"
-	"github.com/rai-project/downloadmanager"
-	"github.com/rai-project/tracer"
+	"github.com/c3sr/config"
+	"github.com/c3sr/downloadmanager"
+	"github.com/c3sr/tracer"
 	gotensor "gorgonia.org/tensor"
 )
 

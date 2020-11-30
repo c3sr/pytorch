@@ -25,15 +25,7 @@ WORKDIR $GOPATH/src/$PKG
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
-RUN dep ensure -v -no-vendor -update \
-    github.com/c3sr/go-pytorch \
-    github.com/c3sr/dlframework \
-    github.com/rai-project/tracer \
-    github.com/c3sr/evaluation && \
-    dep ensure -v -vendor-only
-
-# temporary solution, since there are too many repos need to be modified
-RUN grep -rl 'rai-project/dlframework' vendor | xargs sed -i 's=rai-project/dlframework=c3sr/dlframework=g'
+RUN dep ensure -v -vendor-only
 
 RUN go build -tags=nogpu -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
     cd pytorch-agent && \

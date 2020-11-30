@@ -64,3 +64,11 @@ target/
 .vscode
 
 .github
+
+# dependncy
+vendor
+
+# agent
+pytorch-agent/pytorch-agent
+pytorch-agent/profile.trace
+*/results

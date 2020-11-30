@@ -159,7 +159,7 @@ To run the agent, you need to setup the correct configuration file for the agent
 
 So let's just set them up as is, and worry about the detailed configuration parameter values later.
 
-You must have a `carml` config file called `.carml_config.yml` under your home directory. An example config file `carml_config.yml.example` is in [github.com/rai-project/MLModelScope](https://github.com/rai-project/MLModelScope) . You can move it to `~/.carml_config.yml`.
+You must have a `carml` config file called `.carml_config.yml` under your home directory. An example config file `carml_config.yml.example` is in [github.com/c3sr/MLModelScope](https://github.com/c3sr/MLModelScope) . You can move it to `~/.carml_config.yml`.
 
 The following configuration file can be placed in `$HOME/.carml_config.yml` or can be specified via the `--config="path"` option.
 
@@ -377,7 +377,7 @@ go build -tags="nogpu nolibjpeg"
 ``` -->
 
 
-# Use the Agent with the [MLModelScope Web UI](https://github.com/rai-project/mlmodelscope)
+# Use the Agent with the [MLModelScope Web UI](https://github.com/c3sr/mlmodelscope)
 
 ```
 ./pytorch-agent serve -l -d -v

@@ -7,9 +7,9 @@ package predictor
 // 	"testing"
 
 // 	"github.com/c3sr/dlframework/framework/options"
-// 	"github.com/rai-project/image"
-// 	"github.com/rai-project/image/types"
-// 	nvidiasmi "github.com/rai-project/nvidia-smi"
+// 	"github.com/c3sr/image"
+// 	"github.com/c3sr/image/types"
+// 	nvidiasmi "github.com/c3sr/nvidia-smi"
 // 	py "github.com/c3sr/pytorch"
 // 	"github.com/stretchr/testify/assert"
 // 	gotensor "gorgonia.org/tensor"

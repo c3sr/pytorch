@@ -25,20 +25,8 @@
 #   unused-packages = true
 
 [[constraint]]
-  name = "github.com/elazarl/go-bindata-assetfs"
-  version = "1.0.0"
-
-[[constraint]]
-  name = "github.com/opentracing/opentracing-go"
-  version = "1.0.2"
-
-[[constraint]]
-  name = "github.com/pkg/errors"
-  version = "0.8.0"
-
-[[constraint]]
   branch = "master"
-  name = "github.com/rai-project/config"
+  name = "github.com/c3sr/config"
 
 [[constraint]]
   branch = "master"
@@ -46,43 +34,31 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/downloadmanager"
+  name = "github.com/c3sr/downloadmanager"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/image"
+  name = "github.com/c3sr/image"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/logger"
+  name = "github.com/c3sr/logger"
 
 [[constraint]]
   branch = "master"
-  name = "github.com/rai-project/tracer"
-
-[[constraint]]
-  name = "github.com/sirupsen/logrus"
-  version = "1.2.0"
+  name = "github.com/c3sr/tracer"
 
 [[constraint]]
   branch = "master"
   name = "github.com/c3sr/go-pytorch"
 
 [[override]]
-  name = "github.com/k0kubun/pp"
-  version = "3.0.1"
-
-[[override]]
   name = "github.com/russross/blackfriday"
   version = "=1.5.2"
 
 [[override]]
-  name = "github.com/mohae/joefriday"
-  revision = "b07e8091cfb9214db8446b5101cb69edcfaabd30"
- 
-[[override]]
-  branch = "master"
-  name = "github.com/VividCortex/robustly"
+  name = "gonum.org/v1/gonum"
+  version = "=0.6.0"
 
 [prune]
   go-tests = true

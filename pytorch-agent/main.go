@@ -7,9 +7,9 @@ import (
 	cmd "github.com/c3sr/dlframework/framework/cmd/server"
 	"github.com/c3sr/pytorch"
 	_ "github.com/c3sr/pytorch/predictor"
-	"github.com/rai-project/config"
-	"github.com/rai-project/logger"
-	"github.com/rai-project/tracer"
+	"github.com/c3sr/config"
+	"github.com/c3sr/logger"
+	"github.com/c3sr/tracer"
 	"github.com/sirupsen/logrus"
 )
 

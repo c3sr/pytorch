@@ -25,15 +25,7 @@ WORKDIR $GOPATH/src/$PKG
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
-RUN dep ensure -v -no-vendor -update \
-    github.com/c3sr/go-pytorch \
-    github.com/c3sr/dlframework \
-    github.com/c3sr/evaluation \
-    github.com/rai-project/tracer && \
-    dep ensure -v -vendor-only
-
-# temporary solution, since there are too many repos need to be modified
-RUN grep -rl 'rai-project/dlframework' vendor | xargs sed -i 's=rai-project/dlframework=c3sr/dlframework=g'
+RUN dep ensure -v -vendor-only
 
 ENV LD_LIBRARY_PATH="/usr/local/cuda/lib64/stubs:${LD_LIBRARY_PATH}"
 
