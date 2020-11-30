@@ -1,7 +1,6 @@
 # MLModelScope PyTorch Agent
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/c3sr/pytorch)](https://goreportcard.com/report/github.com/c3sr/pytorch)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://dev.azure.com/yhchang/c3sr/_apis/build/status/c3sr.pytorch?branchName=master)](https://dev.azure.com/yhchang/c3sr/_build/latest?definitionId=3&branchName=master)[![Go Report Card](https://goreportcard.com/badge/github.com/c3sr/pytorch)](https://goreportcard.com/report/github.com/c3sr/pytorch)[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This is the Pytorch agent for [MLModelScope](mlmodelscope.org), an open-source framework and hardware agnostic, extensible and customizable platform for evaluating and profiling ML models across datasets / frameworks / systems, and within AI application pipelines.
 
