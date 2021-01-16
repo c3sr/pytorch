@@ -412,7 +412,7 @@ docker run --gpus=all --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 
     --network host \
     -v ~/.carml_config.yml:/root/.carml_config.yml \
     -v ~/results:/go/src/github.com/c3sr/pytorch/results \
-    carml/pytorch-agent:amd64-gpu-latest predict urls --model_name TorchVision_Alexnet --profile=false --publish=false
+    c3sr/pytorch-agent:amd64-gpu-latest predict urls --model_name TorchVision_Alexnet --profile=false --publish=false
 ```
 NOTE: The SHMEM allocation limit is set to the default of 64MB.  This may be insufficient for PyTorch.  NVIDIA recommends the use of the following flags:
    ```--shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 ...```

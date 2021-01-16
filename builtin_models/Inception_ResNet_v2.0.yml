@@ -1,7 +1,7 @@
 name: Inception_ResNet_v2.0 # name of your model
 framework:
     name: PyTorch # framework for the model
-    version: 1.3.0 # framework version constraint
+    version: 1.5.0 # framework version constraint
 version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
     # multiple platforms can be specified
@@ -42,6 +42,7 @@ output:
         # type parameters
         element_type: float32
         probabilities_layer: 0
+        probabilities_transform: softmax
         features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
         features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources

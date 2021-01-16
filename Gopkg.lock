@@ -397,11 +397,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:fa565d4b60cb08f9436309aff8baa529e73dedc037a005f6cd4092fc87bce241"
+  digest = "1:f0fb4ad1af48147ce06f9f01b1d3aa559de5792e102d7143b9014580ff9c6589"
   name = "github.com/c3sr/go-pytorch"
   packages = ["."]
   pruneopts = "T"
-  revision = "444471b491dddc2b3620fb94a253b2681b3bdd28"
+  revision = "01beaeb42d651f2f84173dca8f0d6078dc7fc1be"
 
 [[projects]]
   branch = "master"
