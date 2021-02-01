@@ -29,8 +29,8 @@
   name = "github.com/c3sr/config"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/c3sr/dlframework"
+  version = "0.3.1"
 
 [[constraint]]
   branch = "master"

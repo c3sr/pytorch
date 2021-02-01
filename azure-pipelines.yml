@@ -1,32 +1,25 @@
+
+variables:
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+
 jobs:
   - job: CPU
     timeoutInMinutes: 0
-    pool:
-      vmImage: 'Ubuntu 16.04'
     steps:
-      - bash: |
-          docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
-          cd pytorch-agent/dockerfiles
-          make docker_build_cpu
-          ./push.sh docker_push_cpu
+      - script: docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
+        condition: eq(variables.isMain, true)
+      - script: make docker_build_cpu
+        workingDirectory: pytorch-agent/dockerfiles
+      - script: ./push.sh docker_push_cpu
+        workingDirectory: pytorch-agent/dockerfiles
+        condition: eq(variables.isMain, true)
   - job: GPU
     timeoutInMinutes: 0
-    pool:
-      vmImage: 'Ubuntu 16.04'
     steps:
-      - bash: |
-          docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
-          cd pytorch-agent/dockerfiles
-          make docker_build_gpu
-          ./push.sh docker_push_gpu
-  # - job: GPU_NGC
-  #   timeoutInMinutes: 0
-  #   pool:
-  #     vmImage: 'Ubuntu 16.04'
-  #   steps:
-  #     - bash: |
-  #         docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
-  #         cd pytorch-agent/dockerfiles
-  #         make docker_build_gpu_ngc
-  #         ./push.sh docker_push_gpu_ngc
-
+      - script: docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
+        condition: eq(variables.isMain, true)
+      - script: make docker_build_gpu
+        workingDirectory: pytorch-agent/dockerfiles
+      - script: ./push.sh docker_push_gpu
+        workingDirectory: pytorch-agent/dockerfiles
+        condition: eq(variables.isMain, true)
