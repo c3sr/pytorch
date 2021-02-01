@@ -306,8 +306,7 @@
   revision = "8ec223752bfc2f65b7e37373a0ac0530ffb81509"
 
 [[projects]]
-  branch = "master"
-  digest = "1:bd642cd0ef0ce4aced1f47f06f5100207a600f255745c8ca7e92b4f2248d827c"
+  digest = "1:f7b05975a15d624c2941a7b618f383fcd773bf15e8d26a1141ee57aab7cacefd"
   name = "github.com/c3sr/dlframework"
   packages = [
     ".",
@@ -321,7 +320,8 @@
     "steps",
   ]
   pruneopts = "T"
-  revision = "a1126c8d32875ba16ef64adf196c4ba627f29673"
+  revision = "a5c0a28bb8a02c76b243def63159f12844733385"
+  version = "v0.3.2"
 
 [[projects]]
   branch = "master"
@@ -396,12 +396,12 @@
   revision = "5f41fcc47fa01bd4eebeb21da28a4a7829a55e48"
 
 [[projects]]
-  branch = "master"
-  digest = "1:f0fb4ad1af48147ce06f9f01b1d3aa559de5792e102d7143b9014580ff9c6589"
+  digest = "1:f3f36f37b23f429801a8f5dabfdea42e3a077adad63be44c1a37c234180bf300"
   name = "github.com/c3sr/go-pytorch"
   packages = ["."]
   pruneopts = "T"
-  revision = "01beaeb42d651f2f84173dca8f0d6078dc7fc1be"
+  revision = "a821be0fbedba7e3da7e699664b13d875edd0024"
+  version = "v0.1.0"
 
 [[projects]]
   branch = "master"
