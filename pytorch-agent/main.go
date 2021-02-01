@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/c3sr/config"
 	cmd "github.com/c3sr/dlframework/framework/cmd/server"
+	"github.com/c3sr/logger"
 	"github.com/c3sr/pytorch"
 	_ "github.com/c3sr/pytorch/predictor"
-	"github.com/c3sr/config"
-	"github.com/c3sr/logger"
 	"github.com/c3sr/tracer"
 	"github.com/sirupsen/logrus"
 )

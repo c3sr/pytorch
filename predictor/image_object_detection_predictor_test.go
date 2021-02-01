@@ -2,23 +2,23 @@ package predictor
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
 
 	"github.com/c3sr/dlframework/framework/options"
-	py "github.com/c3sr/pytorch"
-	"github.com/k0kubun/pp"
 	raiimage "github.com/c3sr/image"
 	"github.com/c3sr/image/types"
 	nvidiasmi "github.com/c3sr/nvidia-smi"
+	py "github.com/c3sr/pytorch"
 	"github.com/stretchr/testify/assert"
 	gotensor "gorgonia.org/tensor"
 )
 
 func TestObjectDetection(t *testing.T) {
 	py.Register()
-	model, err := py.FrameworkManifest.FindModel("MobileNet_SSD_Lite_v2.0:2.0")
+	model, err := py.FrameworkManifest.FindModel("MobileNet_SSD_v1.0:1.0")
 	assert.NoError(t, err)
 	assert.NotEmpty(t, model)
 
@@ -96,14 +96,16 @@ func TestObjectDetection(t *testing.T) {
 		return
 	}
 
-	for ii := 0; ii < len(pred[0]); ii++ {
-		if pred[0][ii].GetBoundingBox().GetLabel() != "background" {
-			pp.Println("Label: ", pred[0][ii].GetBoundingBox().GetLabel())
-			pp.Println("Probability: ", pred[0][ii].GetProbability())
-			pp.Println("Xmax: ", pred[0][ii].GetBoundingBox().GetXmax())
-			pp.Println("Xmin: ", pred[0][ii].GetBoundingBox().GetXmin())
-			pp.Println("Ymax: ", pred[0][ii].GetBoundingBox().GetYmax())
-			pp.Println("Ymin: ", pred[0][ii].GetBoundingBox().GetYmin())
+	for ii, cnt := 0, 0; ii < len(pred[0]) && cnt < 3; ii++ {
+		if pred[0][ii].GetProbability() >= 0.5 {
+			cnt++
+			fmt.Printf("|                             | ./_fixtures/lane_control.jpg           | %s   | %.3f | %.3f | %.3f | %.3f | %.3f       |\n",
+				pred[0][ii].GetBoundingBox().GetLabel(),
+				pred[0][ii].GetBoundingBox().GetXmin(),
+				pred[0][ii].GetBoundingBox().GetXmax(),
+				pred[0][ii].GetBoundingBox().GetYmin(),
+				pred[0][ii].GetBoundingBox().GetYmax(),
+				pred[0][ii].GetProbability())
 		}
 	}
 }
