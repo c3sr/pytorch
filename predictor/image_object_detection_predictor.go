@@ -7,18 +7,18 @@ import (
 	"os"
 	"strings"
 
+	"github.com/c3sr/config"
 	"github.com/c3sr/dlframework"
 	"github.com/c3sr/dlframework/framework/agent"
 	"github.com/c3sr/dlframework/framework/options"
 	common "github.com/c3sr/dlframework/framework/predictor"
+	"github.com/c3sr/downloadmanager"
 	gopytorch "github.com/c3sr/go-pytorch"
 	"github.com/c3sr/pytorch"
+	"github.com/c3sr/tracer"
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
-	"github.com/c3sr/config"
-	"github.com/c3sr/downloadmanager"
-	"github.com/c3sr/tracer"
 	gotensor "gorgonia.org/tensor"
 )
 
