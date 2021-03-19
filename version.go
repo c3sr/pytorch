@@ -2,7 +2,7 @@ package pytorch
 
 // Version ...
 var (
-	Version   = "0.3.5"
+	Version   = "1.0.0"
 	BuildDate = "undefined"
 	GitCommit = "undefined"
 )
