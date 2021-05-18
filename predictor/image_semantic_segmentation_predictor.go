@@ -7,7 +7,6 @@ import (
 	"os"
 	"strings"
 
-	//	"github.com/k0kubun/pp/v3"
 	"github.com/c3sr/config"
 	"github.com/c3sr/dlframework"
 	"github.com/c3sr/dlframework/framework/agent"
@@ -319,6 +318,23 @@ func (p *SemanticSegmentationPredictor) ReadPredictedFeatures(ctx context.Contex
 	}
 
 	return p.CreateSemanticSegmentFeatures(ctx, masks, labels)
+}
+
+// ReadPredictedFeaturesAsMap ...
+func (p *SemanticSegmentationPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+	defer span.Finish()
+
+	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	res := make(map[string]interface{})
+	res["outputs"] = outputs
+	res["labels"] = p.labels
+
+	return res, nil
 }
 
 // Reset ...

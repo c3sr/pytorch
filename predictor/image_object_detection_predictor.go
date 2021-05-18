@@ -326,6 +326,23 @@ func (p *ObjectDetectionPredictor) ReadPredictedFeatures(ctx context.Context) ([
 	return p.CreateBoundingBoxFeatures(ctx, tensorscores, tensorclasses, outputs[1], p.labels)
 }
 
+// ReadPredictedFeaturesAsMap ...
+func (p *ObjectDetectionPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+	defer span.Finish()
+
+	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	res := make(map[string]interface{})
+	res["outputs"] = outputs
+	res["labels"] = p.labels
+
+	return res, nil
+}
+
 // Reset ...
 func (p *ObjectDetectionPredictor) Reset(ctx context.Context) error {
 	return nil
