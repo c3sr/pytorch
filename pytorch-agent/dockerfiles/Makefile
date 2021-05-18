@@ -10,7 +10,6 @@ release: docker_build docker_push
 # Image and binary can be overidden with env vars.
 DOCKER_IMAGE ?= c3sr/pytorch-agent
 
-
 # Get System architecture
 # for now... ask carl how best to get this
 ARCH ?= $(shell go env GOARCH)
@@ -21,11 +20,14 @@ GIT_COMMIT = $(strip $(shell git rev-parse --short HEAD))
 # Get the version number from the code
 CODE_VERSION = v$(strip $(shell cat ../../VERSION))
 
-
 # Find out if the working directory is clean
 GIT_NOT_CLEAN_CHECK = $(shell git status --porcelain)
 
+# Version of cuda to use
+CUDA_VERSION ?= 10.0
 
+# Version fo PYTORCH to use
+PYTORCH_VERSION ?= 1.8.1
 
 # If we're releasing to Docker Hub, and we're going to mark it with the latest tag, it should exactly match a version release
 ifeq ($(MAKECMDGOALS),release)
@@ -48,44 +50,35 @@ DOCKER_TAG = $(CODE_VERSION)-$(GIT_COMMIT)$(DOCKER_TAG_SUFFIX)
 endif
 
 BUILD_ARGS = --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-						 --build-arg VERSION=$(CODE_VERSION) \
-		         --build-arg VCS_URL=`git config --get remote.origin.url` \
-		         --build-arg VCS_REF=$(GIT_COMMIT) \
-		         --build-arg ARCH=$(ARCH) \
-						 --build-arg FRAMEWORK_VERSION="1.0"
+				--build-arg VERSION=$(CODE_VERSION) \
+		    --build-arg VCS_URL=`git config --get remote.origin.url` \
+		    --build-arg VCS_REF=$(GIT_COMMIT) \
+		    --build-arg ARCH=$(ARCH) \
+				--build-arg PYTORCH_VERSION=$(PYTORCH_VERSION)
+
+docker_build: docker_build_cpu docker_build_gpu
+
+docker_build_cpu: # Build CPU Docker image
+	@docker build $(BUILD_ARGS) \
+		-f Dockerfile.$(ARCH)_cpu_pytorch$(PYTORCH_VERSION) \
+		-t $(DOCKER_IMAGE):$(ARCH)-cpu-pytorch$(PYTORCH_VERSION)-$(DOCKER_TAG) .
 
 docker_build_gpu: # Build GPU Docker image
 	@docker build $(BUILD_ARGS) \
-		-f Dockerfile.$(ARCH)_gpu \
-		-t $(DOCKER_IMAGE):$(ARCH)-gpu-$(DOCKER_TAG) .
-docker_build_cpu:  # Build CPU Docker image
-	@docker build $(BUILD_ARGS) \
-		-f Dockerfile.$(ARCH)_cpu \
-		-t "$(DOCKER_IMAGE):$(ARCH)-cpu-$(DOCKER_TAG)" .
-docker_build_gpu_ngc: # Build GPU Docker image
-	@docker build $(BUILD_ARGS) \
-		-f Dockerfile.$(ARCH)_gpu_ngc \
-		-t $(DOCKER_IMAGE):$(ARCH)-gpu-ngc-$(DOCKER_TAG) .
+		-f Dockerfile.$(ARCH)_gpu_pytorch$(PYTORCH_VERSION)_cuda$(CUDA_VERSION) \
+		-t $(DOCKER_IMAGE):$(ARCH)-gpu-pytorch$(PYTORCH_VERSION)-cuda$(CUDA_VERSION)-$(DOCKER_TAG) .
 
-docker_build: docker_build_cpu docker_build_gpu docker_build_gpu_ngc
-
-
-docker_push_cpu: # Tag image as latest and Push to DockerHub
-	docker tag $(DOCKER_IMAGE):$(ARCH)-cpu-$(DOCKER_TAG) $(DOCKER_IMAGE):$(ARCH)-cpu-latest
-	docker push $(DOCKER_IMAGE):$(ARCH)-cpu-$(DOCKER_TAG)
-	docker push $(DOCKER_IMAGE):$(ARCH)-cpu-latest
+docker_push_cpu: # Tag image as latest and Push to Dockerhub
+	docker tag $(DOCKER_IMAGE):$(ARCH)-cpu-pytorch$(PYTORCH_VERSION)-$(DOCKER_TAG) $(DOCKER_IMAGE):$(ARCH)-cpu-pytorch$(PYTORCH_VERSION)-latest
+	docker push $(DOCKER_IMAGE):$(ARCH)-cpu-pytorch$(PYTORCH_VERSION)-$(DOCKER_TAG)
+	docker push $(DOCKER_IMAGE):$(ARCH)-cpu-pytorch$(PYTORCH_VERSION)-latest
 
 docker_push_gpu: # Tag image as latest and Push to DockerHub
-	docker tag $(DOCKER_IMAGE):$(ARCH)-gpu-$(DOCKER_TAG) $(DOCKER_IMAGE):$(ARCH)-gpu-latest
-	docker push $(DOCKER_IMAGE):$(ARCH)-gpu-$(DOCKER_TAG)
-	docker push $(DOCKER_IMAGE):$(ARCH)-gpu-latest
+	docker tag $(DOCKER_IMAGE):$(ARCH)-gpu-pytorch$(PYTORCH_VERSION)-cuda$(CUDA_VERSION)-$(DOCKER_TAG) $(DOCKER_IMAGE):$(ARCH)-gpu-pytorch$(PYTORCH_VERSION)-cuda$(CUDA_VERSION)-latest
+	docker push $(DOCKER_IMAGE):$(ARCH)-gpu-pytorch$(PYTORCH_VERSION)-cuda$(CUDA_VERSION)-$(DOCKER_TAG)
+	docker push $(DOCKER_IMAGE):$(ARCH)-gpu-pytorch$(PYTORCH_VERSION)-cuda$(CUDA_VERSION)-latest
 
-docker_push_gpu_ngc: # Tag image as latest and Push to DockerHub
-	docker tag $(DOCKER_IMAGE):$(ARCH)-gpu-ngc-$(DOCKER_TAG) $(DOCKER_IMAGE):$(ARCH)-gpu-ngc-latest
-	docker push $(DOCKER_IMAGE):$(ARCH)-gpu-ngc-$(DOCKER_TAG)
-	docker push $(DOCKER_IMAGE):$(ARCH)-gpu-ngc-latest
-
-docker_push: docker_push_cpu docker_push_gpu docker_push_gpu_ngc
+docker_push: docker_push_cpu docker_push_gpu
 
 output:
 	@echo Docker Image: $(DOCKER_IMAGE):$(DOCKER_TAG)
