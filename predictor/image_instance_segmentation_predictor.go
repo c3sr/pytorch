@@ -299,6 +299,23 @@ package predictor
 // 	return p.CreateInstanceSegmentFeatures(ctx, probabilities, classes, boxes, masks, p.labels)
 // }
 
+// ReadPredictedFeaturesAsMap ...
+// func (p *InstanceSegmentationPredictor) ReadPredictedFeaturesAsMap(ctx context.Context) (map[string]interface{}, error) {
+//	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features_as_map")
+//	defer span.Finish()
+//
+//	outputs, err := p.predictor.ReadPredictionOutput(ctx)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	res := make(map[string]interface{})
+//	res["outputs"] = outputs
+//	res["labels"] = p.labels
+//
+//	return res, nil
+// }
+
 // func (p *InstanceSegmentationPredictor) Reset(ctx context.Context) error {
 
 // 	return nil

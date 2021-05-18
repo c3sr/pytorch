@@ -11,9 +11,9 @@ replace (
 
 require (
 	github.com/c3sr/config v1.0.1
-	github.com/c3sr/dlframework v1.0.2
+	github.com/c3sr/dlframework v1.2.2
 	github.com/c3sr/downloadmanager v1.0.0
-	github.com/c3sr/go-pytorch v1.0.2
+	github.com/c3sr/go-pytorch v1.1.0
 	github.com/c3sr/image v1.0.0
 	github.com/c3sr/logger v1.0.1
 	github.com/c3sr/nvidia-smi v1.0.0
