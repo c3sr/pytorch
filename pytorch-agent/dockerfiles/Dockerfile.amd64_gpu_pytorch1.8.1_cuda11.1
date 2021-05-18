@@ -1,4 +1,4 @@
-FROM c3sr/go-pytorch:amd64-cpu-latest
+FROM c3sr/go-pytorch:amd64-gpu-pytorch1.8.1-cuda11.1-latest
 MAINTAINER Yen-Hsiang Chang <yhchang3@illinois.edu>
 
 # Build-time metadata as defined at http://label-schema.org
@@ -7,7 +7,8 @@ ARG VCS_REF
 ARG VCS_URL
 ARG VERSION
 ARG ARCH
-ARG FRAMEWORK_VERSION
+ARG PYTORCH_VERSION
+
 LABEL org.pytorch.agent.build-date=$BUILD_DATE \
       org.pytorch.agent.name="pytorch agent" \
       org.pytorch.agent.description="" \
@@ -21,16 +22,11 @@ LABEL org.pytorch.agent.build-date=$BUILD_DATE \
 
 # Get Go bindings
 ENV PKG github.com/c3sr/pytorch
-WORKDIR $GOPATH/src/$PKG
+WORKDIR /c3sr/pytorch
 
 RUN git clone --depth=1 --branch=master https://${PKG}.git .
 
-RUN dep ensure -v -vendor-only
-
-RUN go build -tags=nogpu -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}" && \
-    cd pytorch-agent && \
-    go install -tags=nogpu && \
-    cd ..
+RUN cd pytorch-agent && \
+    go install -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}"
 
 ENTRYPOINT ["pytorch-agent"]
-
