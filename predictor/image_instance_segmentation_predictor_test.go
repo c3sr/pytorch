@@ -51,7 +51,7 @@ package predictor
 // 	height := img.Bounds().Dy()
 // 	width := img.Bounds().Dx()
 // 	channels := 3
-// 	input := make([]*gotensor.Dense, batchSize)
+// 	input := make([]gotensor.Tensor, batchSize)
 // 	imgBytes := img.(*types.RGBImage).Pix
 
 // 	for ii := 0; ii < batchSize; ii++ {
@@ -61,7 +61,14 @@ package predictor
 // 		)
 // 	}
 
-// 	err = predictor.Predict(ctx, input)
+//  joined, err := gotensor.Concat(0, input[0], input[1:]...)
+//  if err != nil {
+//    return
+//  }
+//  joined.Reshape(append([]int{len(input)}, input[0].Shape()...)...)
+
+//  err = predictor.Predict(ctx, []gotensor.Tensor{joined})
+
 // 	assert.NoError(t, err)
 // 	if err != nil {
 // 		return

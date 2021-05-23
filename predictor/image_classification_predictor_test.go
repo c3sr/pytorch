@@ -155,7 +155,7 @@ func TestImageClassification(t *testing.T) {
 		panic(err)
 	}
 
-	input := make([]*gotensor.Dense, batchSize)
+	input := make([]gotensor.Tensor, batchSize)
 	imgFloats, err := normalizeImageCHW(resized, preprocessOpts.MeanImage, preprocessOpts.Scale)
 	if err != nil {
 		panic(err)
@@ -168,7 +168,14 @@ func TestImageClassification(t *testing.T) {
 		)
 	}
 
-	err = predictor.Predict(ctx, input)
+	joined, err := gotensor.Concat(0, input[0], input[1:]...)
+	if err != nil {
+		return
+	}
+	joined.Reshape(append([]int{len(input)}, input[0].Shape()...)...)
+
+	err = predictor.Predict(ctx, []gotensor.Tensor{joined})
+
 	assert.NoError(t, err)
 	if err != nil {
 		return
