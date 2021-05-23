@@ -267,23 +267,17 @@ package predictor
 
 // // Predict ...
 // func (p *InstanceSegmentationPredictor) Predict(ctx context.Context, data interface{}, opts ...options.Option) error {
-// 	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "predict")
-// 	defer span.Finish()
 
 // 	if data == nil {
 // 		return errors.New("input data nil")
 // 	}
-// 	input, ok := data.([]*gotensor.Dense)
+
+// 	input, ok := data.([]gotensor.Tensor)
 // 	if !ok {
 // 		return errors.New("input data is not slice of dense tensors")
 // 	}
 
-// 	tensor, err := makeTensorFromGoTensors(input)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	// TODO interface image enhancement call to predictor backend
-// 	return nil
+// 	return p.predictor.Predict(ctx, gotensors)
 // }
 
 // // ReadPredictedFeatures ...
