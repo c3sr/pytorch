@@ -176,6 +176,8 @@ github.com/c3sr/dlframework v1.2.2 h1:zyIhEVKVSxBX2mBBoWULcoug8rNt+VwOUWKKCe6Dvt
 github.com/c3sr/dlframework v1.2.2/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
 github.com/c3sr/dlframework v1.3.1 h1:Qv+6xZzcGaR+JT/cXMdMVD892GphDMr6ACQ/V4tKbm8=
 github.com/c3sr/dlframework v1.3.1/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
+github.com/c3sr/dlframework v1.3.2 h1:MHvZu2gZyNSvMXK0osp4VtrH80jEI1Vu0mABNPl2dWw=
+github.com/c3sr/dlframework v1.3.2/go.mod h1:0JeraG4b0xvgyd0EkMn44zwcR3LyaX6xkSi3MTg4X40=
 github.com/c3sr/downloadmanager v1.0.0 h1:iyrfSy4k8N514LyW/IPhmt1M3lC6tSRB5VX9Dv18g1k=
 github.com/c3sr/downloadmanager v1.0.0/go.mod h1:YqQ+Ps7QIjsu0vZ5DQekJfsZ5ferSd1r4Rr4wG6RmwI=
 github.com/c3sr/go-cupti v1.0.1 h1:TW4U/uhw/kdTw+cMs5Yf/QmZVB8hS096hWLWybYddps=
@@ -190,6 +192,8 @@ github.com/c3sr/go-pytorch v1.1.0 h1:v8fj75J6Jd1wiUzrDrLnkY2KTTTZVPcw4Bbd4qJO7Gc
 github.com/c3sr/go-pytorch v1.1.0/go.mod h1:Q0lSG/GcsZGg6ZrYCi7ucPlpXCbVKQX4Y6XpEceqcUc=
 github.com/c3sr/go-pytorch v1.1.1 h1:IeDNTHthxjMzhyXjHLPtpcMQ17+1LQ08HRoUVK17wRM=
 github.com/c3sr/go-pytorch v1.1.1/go.mod h1:tJFLwWhvst8mgdUMi1xkSUeOP2FyqfnLouArEHfNIGw=
+github.com/c3sr/go-pytorch v1.1.2 h1:jazv9hsskwPuOHaCKcSgc0LW44Snjb2QUlQ+n+dez84=
+github.com/c3sr/go-pytorch v1.1.2/go.mod h1:lwhh1b9ObMwmcd4vmg10TCX7zm0542d5alkv+06ILAc=
 github.com/c3sr/grpc v1.0.0 h1:qsL5COvhVoxlycUcfKlUvNnS0ILlDcbiWKAt2xxhqAE=
 github.com/c3sr/grpc v1.0.0/go.mod h1:odSfiDfxpwmzRVgl1dodi8e8ZObNqbddBXK4zgrDVgI=
 github.com/c3sr/image v1.0.0 h1:THtS/yEDiHE3wqMxGaG7YDLjjDFi7RahHMDz8lJh8O0=
