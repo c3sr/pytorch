@@ -13,11 +13,11 @@ require (
 	github.com/c3sr/config v1.0.1
 	github.com/c3sr/dlframework v1.3.2
 	github.com/c3sr/downloadmanager v1.0.0
-	github.com/c3sr/go-pytorch v1.1.2
-	github.com/c3sr/image v1.0.0
+	github.com/c3sr/go-pytorch v1.2.4
+	github.com/c3sr/image v1.0.1
 	github.com/c3sr/logger v1.0.1
-	github.com/c3sr/nvidia-smi v1.0.0
-	github.com/c3sr/tracer v1.0.0
+	github.com/c3sr/nvidia-smi v1.0.2
+	github.com/c3sr/tracer v1.0.4
 	github.com/elazarl/go-bindata-assetfs v1.0.1
 	github.com/k0kubun/pp/v3 v3.0.7
 	github.com/opentracing/opentracing-go v1.2.0
